@@ -1,10 +1,11 @@
 bulk image resizer using python
 
-```
 using git
+```
 python setup.py install -e .
 ```
 
+using pip
 ```
 pip install reebulk
 
