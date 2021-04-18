@@ -34,3 +34,6 @@ or
 
 $reebulk images -p 50 -q 100
 ```
+
+
+![preview](image.png)
