@@ -17,14 +17,20 @@ reebulk -h
 resize from another folder/drive
 ```
 # resize image with 50% of default size
+
 reebulk "c:\users\pictures\images" -p 50
 ```
 
 resize from current opened folder
 ```
-reebulk images -p 50 -o saved # with custom output folder
+# with custom output folder
+
+reebulk images -p 50 -o saved
 ```
 or
 ```
-reebulk images -p 50 # default output folder
+# resize with 50% of size and 100% of quality of the image
+# default -q is 50
+
+$reebulk images -p 50 -q 100
 ```
