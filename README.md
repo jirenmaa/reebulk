@@ -12,7 +12,7 @@ resize from another folder/drive
 reebulk "c:\users\pictures\images" -p 50
 ```
 
-resize from current opended folder
+resize from current opened folder
 ```
 reebulk images -p 50 -o saved # with custom output folder
 
