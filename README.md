@@ -1,5 +1,6 @@
 bulk image resizer using python
 
+# setup
 using git
 ```
 python setup.py install -e .
@@ -12,6 +13,7 @@ pip install reebulk
 reebulk -h
 ```
 
+# usage
 resize from another folder/drive
 ```
 # resize image with 50% of default size
