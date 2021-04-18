@@ -1,6 +1,6 @@
 import argparse
+import imghdr
 import os
-import sys
 import pathlib
 from tqdm import tqdm
 
@@ -51,6 +51,7 @@ def arguments():
 
     return parser.parse_args()
 
+
 def main():
     args = arguments()
 
@@ -60,6 +61,8 @@ def main():
             "must be 'width:height' or 'percentage'"
         )
 
+    temp_outputs = ""
+    default_save = "resized/"
     # saved directory name
     savings_dir = args.o
     # directory of bulk images than need to be resized
@@ -73,32 +76,47 @@ def main():
     if os.path.isdir(temp):
         current_dir = "%s/" % temp
 
-    # which will not raise an error if the `path` already exists and it
-    # will recursively create the paths, if the preceding path doesn't exist
-    maps = (r"%s" % args.o).split("\\")
-    # excluded the last last foler, cuz that is the folder that will be created
-    temp = "/".join(maps[:-1])
-    # output image folder
-    save = maps[-1]
+    # output is in diferent directory/drive
+    if args.o != default_save:
+        # which will not raise an error if the `path` already exists and it
+        # will recursively create the paths, if the preceding path doesn't exist
+        maps = (r"%s" % args.o).split("\\")
+        # excluded the last last foler, cuz that is the folder that will be created
+        temp_outputs = "/".join(maps[:-1])
+        # output image folder
+        save = maps[-1]
 
-    if os.path.isdir(temp):
+    # output is a directory and in diferent directory/drive
+    if os.path.isdir(temp_outputs):
         savings_dir = temp + "/%s/" % save
         os.makedirs("%s/%s" % (temp, save), exist_ok=True)
     else:
-        os.makedirs(
-            str(pathlib.Path(__file__).parent.absolute()) + "/%s/" % savings_dir,
-            exist_ok=True,
+        # if user have the default output folder in current opened
+        # command prompt then set the saving dir as default
+        print(
+            "\n"
+            "    You are currently saving in the existed default folder\n"
+            "    saved : %s\%s" % (args.folder, args.o)
         )
+        savings_dir = current_dir + "/%s/" % savings_dir
+        os.makedirs(savings_dir, exist_ok=True)
 
+    # list all items in directory
     list_directory = os.listdir(current_dir)
+    # filter list directory as (jpg, jepg, png) only
+    list_directory = list(
+        filter(lambda e: e.endswith(("jpg", "png", "jpeg")), list_directory)
+    )
     len_ldirectory = len(list_directory)
-    print(f"""
+    print(
+        f"""
     Target Directory  : {args.folder}
     Target Output     : {args.o}
     Target Dimension  : {args.d}
     Target Percentage : {args.p}%
     Target Quality    : {args.q}/100 pixels
-    """)
+    """
+    )
 
     for index in tqdm(range(len_ldirectory)):
         images = current_dir + list_directory[index]
@@ -119,6 +137,7 @@ def main():
         file = savings_dir + splits[-1] + ex
         imgs = img.resize(size, PIL.Image.ANTIALIAS)
         imgs.save(file, quality=args.q)
+        imgs.close()
 
 
 if __name__ == "__main__":
