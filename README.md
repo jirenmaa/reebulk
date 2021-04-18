@@ -21,8 +21,8 @@ reebulk "c:\users\pictures\images" -p 50
 resize from current opened folder
 ```
 reebulk images -p 50 -o saved # with custom output folder
-
+```
 or
-
+```
 reebulk images -p 50 # default output folder
 ```
