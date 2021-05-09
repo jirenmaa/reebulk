@@ -10,6 +10,7 @@ using pip
 ```
 pip install reebulk
 
+# help commands
 reebulk -h
 ```
 
