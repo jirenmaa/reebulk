@@ -1,5 +1,3 @@
-bulk image resizer using python
-
 # setup
 using git
 ```
