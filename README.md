@@ -1,5 +1,5 @@
 # setup
-using git
+setup using git clone
 ```
 python setup.py install -e .
 ```
